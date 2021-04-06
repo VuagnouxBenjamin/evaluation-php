@@ -1,8 +1,17 @@
+<?php include 'template/header.php' ?>
 <?php 
-use App\Table\Produit; 
 
-$datas = $db->query('SELECT * FROM produits', 'App\Table\Produit'); 
+    // Initialisation de la classe Produit.
+    require '../app/table/Produit.php'; 
+    use App\Table\Produit; 
 
+    // Initialisation de la BDD.
+    require '../app/Database.php';
+    use App\Database; 
+    $db = new Database('jarditou'); 
+    
+    // Recuperation des sources depuis la BDD. 
+    $datas = $db->query('SELECT * FROM produits', 'App\Table\Produit'); 
 ?>
 
 <table class="table table-bordered border-dark mt-3 table-responsive ">
@@ -25,28 +34,29 @@ $datas = $db->query('SELECT * FROM produits', 'App\Table\Produit');
     <?php foreach($datas as $row) :?>
         
         <tr>
-            <td class="table-warning text-center"><img src="<?= $row->getIMG() ?>" width="150px"></td>
-            <td class="table-secondary text-center"><?= $row->pro_id; ?></td>
-            <td class="table-secondary text-center"><?= $row->pro_ref; ?></td>
-            <td class="table-warning text-center">
+            <td class="table-warning text-center" style="vertical-align: middle;"><img src="<?= $row->getIMG() ?>" width="150px"></td>
+            <td class="table-secondary text-center my-auto" style="vertical-align: middle;"><?= $row->pro_id; ?></td>
+            <td class="table-secondary text-center" style="vertical-align: middle;"><?= $row->pro_ref; ?></td>
+            <td class="table-warning text-center" style="vertical-align: middle;">
                 <a href="<?= $row->getURL() ?>" class="link-danger fw-bold">
                     <?= $row->pro_libelle; ?>
                 </a>
             </td>
-            <td class="table-secondary text-center"><?= $row->pro_prix . ' €'; ?></td>
-            <td class="table-secondary text-center"><?= $row->pro_stock; ?></td>
-            <td class="table-secondary text-center"><?= $row->pro_couleur; ?></td>
-            <td class="table-secondary text-center"><?= $row->pro_d_ajout; ?></td>
-            <td class="table-secondary text-center"><?= $row->pro_d_modif; ?></td>
-            <td class="table-secondary text-center"><?= $row->isBlocked(); ?></td>
+            <td class="table-secondary text-center" style="vertical-align: middle;"><?= $row->pro_prix . ' €'; ?></td>
+            <td class="table-secondary text-center" style="vertical-align: middle;"><?= $row->pro_stock; ?></td>
+            <td class="table-secondary text-center" style="vertical-align: middle;"><?= $row->pro_couleur; ?></td>
+            <td class="table-secondary text-center" style="vertical-align: middle;"><?= $row->pro_d_ajout; ?></td>
+            <td class="table-secondary text-center" style="vertical-align: middle;"><?= $row->pro_d_modif; ?></td>
+            <td class="table-secondary text-center" style="vertical-align: middle;"><?= $row->isBlocked(); ?></td>
         </tr>
     <?php endforeach; ?>  
     </tbody>
 </table>
 
 <div class="my-5">
-    <a href="index.php?p=ajout" class="btn btn-danger  shadow-sm">
+    <a href="add_form.php" class="btn btn-danger  shadow-sm">
         Ajouter un produit
     </a>
 </div>
 
+<?php include 'template/footer.php' ?>

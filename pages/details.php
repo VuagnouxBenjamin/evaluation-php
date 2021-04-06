@@ -1,27 +1,25 @@
 <?php 
-use App\Table\Produit; 
-use App\Table\Categorie; 
+    // Initialisation de la classe Produit.
+    require '../app/table/Produit.php'; 
+    use App\Table\Produit; 
 
-$produits = $db->prepare(
-    "SELECT * 
-    FROM produits 
-    JOIN categories 
-        ON categories.cat_id = produits.pro_cat_id
-    WHERE pro_id = ?  
-    ", [$_GET['pro_id']],'App\Table\Produit', true); 
-// DEBUG
-// var_dump($produits); 
+    // Initialisation de la BDD.
+    require '../app/Database.php';
+    use App\Database; 
+    $db = new Database('jarditou'); 
 
-// $categories = $db->query(
-//     "SELECT DISTINCT * 
-//     FROM categories
-//     ", 'App\Table\Categorie'); 
-
-// DEBUG
-// var_dump($categories); 
+    //recuperation des données. 
+    $produits = $db->prepare(
+        "SELECT * 
+        FROM produits 
+        JOIN categories 
+            ON categories.cat_id = produits.pro_cat_id
+        WHERE pro_id = ?  
+        ", [$_GET['pro_id']],'App\Table\Produit', true); 
 ?>
 
 
+<?php include 'template/header.php' ?>
 
 <div class="text-center mt-3">
     <img src="<?= $produits->getIMG() ?>" alt="" width="250">
@@ -81,13 +79,15 @@ $produits = $db->prepare(
 </form>
 
 <div class="my-5">
-    <a href="index.php?p=list" class="btn btn-secondary  shadow-sm">
+    <a href="list.php" class="btn btn-secondary  shadow-sm">
         Retour
     </a>
-    <a href="index.php?p=modif&pro_id=<?= $produits->pro_id ?>" class="btn btn-warning  shadow-sm">
+    <a href="update_form.php?pro_id=<?= $produits->pro_id ?>" class="btn btn-warning  shadow-sm">
         Modifier
     </a>
-    <a href="index.php?p=suppr&pro_id=<?= $produits->pro_id ?>" class="btn btn-danger  shadow-sm">
+    <a href="delete_form.php?pro_id=<?= $produits->pro_id ?>" class="btn btn-danger  shadow-sm">
         Supprimer
     </a>
 </div>
+
+<?php include 'template/footer.php' ?>

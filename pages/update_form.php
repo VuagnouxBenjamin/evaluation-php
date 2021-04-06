@@ -1,27 +1,32 @@
 <?php 
-use App\Table\Produit; 
-use App\Table\Categorie; 
+    // Initialisation des  classes Produit.
+    require '../app/table/Produit.php'; 
+    use App\Table\Produit; 
+    require '../app/table/Categorie.php'; 
+    use App\Table\Categorie; 
 
-$produits = $db->prepare(
-    "SELECT * 
-    FROM produits 
-    JOIN categories 
-        ON categories.cat_id = produits.pro_cat_id
-    WHERE pro_id = ?  
-    ", [$_GET['pro_id']],'App\Table\Produit', true); 
-// DEBUG
-// var_dump($produits); 
 
-$categories = $db->query(
-    "SELECT DISTINCT * 
-    FROM categories
-    ", 'App\Table\Categorie'); 
+    // Initialisation de la BDD.
+    require '../app/Database.php';
+    use App\Database; 
+    $db = new Database('jarditou'); 
 
-// DEBUG
-// var_dump($categories); 
+    // Récuperation des données. 
+    $produits = $db->prepare(
+        "SELECT * 
+        FROM produits 
+        JOIN categories 
+            ON categories.cat_id = produits.pro_cat_id
+        WHERE pro_id = ?  
+        ", [$_GET['pro_id']],'App\Table\Produit', true); 
+
+    $categories = $db->query(
+        "SELECT DISTINCT * 
+        FROM categories
+        ", 'App\Table\Categorie'); 
 ?>
 
-
+<?php include 'template/header.php' ?>
 
 <div class="text-center mt-3">
     <img src="<?= $produits->getIMG() ?>" alt="" width="250">
@@ -83,7 +88,9 @@ $categories = $db->query(
         <input type="file" class="form-control" id="prod_pic" name="prod_pic">
     </div>
     <div class="my-5">
-        <a href="index.php?p=detail&pro_id=<?= $produits->pro_id ?>" class="btn btn-secondary btn-lg">Retour</a>
+        <a href="details.php?pro_id=<?= $produits->pro_id ?>" class="btn btn-secondary btn-lg">Retour</a>
         <button type="submit" class="btn btn-success btn-lg">Enregistrer</button>
     </div> 
 </form>
+
+<?php include 'template/footer.php' ?>

@@ -13,7 +13,7 @@ class Produit{
      * Prend l'ID du produit en $_GET
      */
     public function getURL(){
-        return 'index.php?p=detail&pro_id=' . $this->pro_id; 
+        return 'details.php?pro_id=' . $this->pro_id; 
     }
 
     /**
@@ -23,11 +23,11 @@ class Produit{
      * Si aucune img disponible pour le produit, renvoie l'img par defaut. 
      */
     public function getIMG(){
-        $img = scandir('././pages/img'); 
+        $img = scandir('./../pages/img'); 
 
         if (in_array( $this->pro_id . '.' . $this->pro_photo, $img)){
-            return 'pages/img/' . $this->pro_id . '.' . $this->pro_photo;;
-        } else return 'pages/img/no-img.jpg';
+            return 'img/' . $this->pro_id . '.' . $this->pro_photo;;
+        } else return 'img/no-img.jpg';
     }
 
     /**
