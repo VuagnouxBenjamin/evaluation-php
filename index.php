@@ -22,7 +22,15 @@
         require 'pages/list.php'; 
     } elseif ($p === 'contact') {
         require 'pages/contact.php'; 
-    }
+    } elseif ($p === 'detail') {
+        require 'pages/detail.php'; 
+    } elseif ($p === 'ajout') {
+        require 'pages/ajout.php'; 
+    } elseif ($p === 'suppr') {
+        require 'pages/suppr.php'; 
+    } elseif ($p === 'modif') {
+        require 'pages/modif.php'; 
+    } 
     $content = ob_get_clean(); 
     require 'pages/template/default.php';
 

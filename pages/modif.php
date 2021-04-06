@@ -1,0 +1,89 @@
+<?php 
+use App\Table\Produit; 
+use App\Table\Categorie; 
+
+$produits = $db->prepare(
+    "SELECT * 
+    FROM produits 
+    JOIN categories 
+        ON categories.cat_id = produits.pro_cat_id
+    WHERE pro_id = ?  
+    ", [$_GET['pro_id']],'App\Table\Produit', true); 
+// DEBUG
+// var_dump($produits); 
+
+$categories = $db->query(
+    "SELECT DISTINCT * 
+    FROM categories
+    ", 'App\Table\Categorie'); 
+
+// DEBUG
+// var_dump($categories); 
+?>
+
+
+
+<div class="text-center mt-3">
+    <img src="<?= $produits->getIMG() ?>" alt="" width="250">
+</div>
+
+<form action="models/update_script.php" method="post" enctype="multipart/form-data">
+    <div class="form-group mt-4">
+        <label for="prod_ref" class="mb-2">ID :</label>
+        <input type="text" class="form-control" id="prod_ref" name="prod_ref" value="<?= $produits->pro_id?>" readonly>
+    </div>
+    <div class="form-group mt-4">
+        <label for="prod_ref" class="mb-2">Référence :</label>
+        <input type="text" class="form-control" id="prod_ref" name="prod_ref" value="<?= $produits->pro_ref?>">
+    </div>
+    <!-- //changer ici par une liste qui prends les catégories. JOIN etc... -->
+    <div class="form-group mt-4">
+        <label for="prod_cat" class="mb-2">Catégorie :</label>
+        <select class="form-control" id="prod_cat" name="prod_cat">
+        <option value = <?= $produits->cat_id ?>><?= $produits->cat_nom ?>
+            <?php foreach($categories as $categorie) : ?>
+                <option value = <?= $categorie->cat_id ?>><?= $categorie->cat_nom ?></option>
+            <?php endforeach; ?> 
+        </select>
+    </div>
+    <div class="form-group mt-4">
+        <label for="prod_lib" class="mb-2">Libellé :</label>
+        <input type="text" class="form-control" id="prod_lib" name="prod_lib" value="<?= $produits->pro_libelle?>">
+    </div>
+    <div class="form-group mt-4">
+        <label for="prod_des" class="mb-2">Description :</label>
+        <textarea class="form-control" id="prod_des" rows="3" name="prod_des"><?= $produits->pro_description ?></textarea>
+    </div>
+    <div class="form-group mt-4">
+        <label for="prod_pri" class="mb-2">Prix :</label>
+        <input type="text" class="form-control" id="prod_pri" name="prod_pri" value="<?= $produits->pro_prix . " €";?>">
+    </div>
+    <div class="form-group mt-4">
+        <label for="prod_sto" class="mb-2">Stock :</label>
+        <input type="text" class="form-control" id="prod_sto" name="prod_sto" value="<?= $produits->pro_stock?>">
+    </div>
+    <div class="form-group mt-4">
+        <label for="prod_cou" class="mb-2">Couleur</label>
+        <input type="text" class="form-control" id="prod_cou" name="prod_cou" value="<?= $produits->pro_couleur?>">
+    </div>
+    <div class="form-group mt-4">
+        <p class="mb-2">Produit bloqué ?</p>
+        <?= $produits->radioBlocked(false); ?>
+    </div>
+    <div class="form-group mt-4">
+        <label for="prod_dat" class="mb-2">Date d'ajout :</label>
+        <input type="date" class="form-control" id="prod_dat" name="prod_dat" value="<?= $produits->pro_d_ajout?>" readonly>
+    </div>
+    <div class="form-group mt-4">
+        <label for="prod_dat_mod" class="mb-2">Date de modification :</label>
+        <input type="date" class="form-control" id="prod_dat_mod" name="prod_dat_mod" value="<?= $produits->getDate();?>" readonly>
+    </div>
+    <div class="form-group mt-4">
+        <label for="prod_pic" class="mb-2">Image du produit :</label>
+        <input type="file" class="form-control" id="prod_pic" name="prod_pic">
+    </div>
+    <div class="my-5">
+        <a href="index.php?p=detail&pro_id=<?= $produits->pro_id ?>" class="btn btn-secondary btn-lg">Retour</a>
+        <button type="submit" class="btn btn-success btn-lg">Enregistrer</button>
+    </div> 
+</form>

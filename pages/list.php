@@ -2,9 +2,10 @@
 use App\Table\Produit; 
 
 $datas = $db->query('SELECT * FROM produits', 'App\Table\Produit'); 
+
 ?>
 
-<table class="table table-bordered border-dark mt-3">
+<table class="table table-bordered border-dark mt-3 table-responsive ">
     <thead>
         <tr>
         <th scope="col" class="table-secondary text-center">Photos</th>
@@ -22,8 +23,9 @@ $datas = $db->query('SELECT * FROM produits', 'App\Table\Produit');
 
     <tbody>
     <?php foreach($datas as $row) :?>
+        
         <tr>
-            <td class="table-warning text-center"><img src="<?= $row->getIMG() ?>"  width="150px"></td>
+            <td class="table-warning text-center"><img src="<?= $row->getIMG() ?>" width="150px"></td>
             <td class="table-secondary text-center"><?= $row->pro_id; ?></td>
             <td class="table-secondary text-center"><?= $row->pro_ref; ?></td>
             <td class="table-warning text-center">
@@ -36,8 +38,15 @@ $datas = $db->query('SELECT * FROM produits', 'App\Table\Produit');
             <td class="table-secondary text-center"><?= $row->pro_couleur; ?></td>
             <td class="table-secondary text-center"><?= $row->pro_d_ajout; ?></td>
             <td class="table-secondary text-center"><?= $row->pro_d_modif; ?></td>
-            <td class="table-secondary text-center"><?= $row->pro_bloque; ?></td>
+            <td class="table-secondary text-center"><?= $row->isBlocked(); ?></td>
         </tr>
     <?php endforeach; ?>  
     </tbody>
 </table>
+
+<div class="my-5">
+    <a href="index.php?p=ajout" class="btn btn-danger  shadow-sm">
+        Ajouter un produit
+    </a>
+</div>
+

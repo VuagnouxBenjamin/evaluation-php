@@ -11,7 +11,7 @@
 </head>
 <body class="container">
 	<header class="d-none d-lg-flex m-2 justify-content-between align-content-center">
-		<img src="views/img/jarditou_logo.jpg" alt="logo jarditou.com" class="" height="50">
+		<img src="pages/img/jarditou_logo.jpg" alt="logo jarditou.com" class="" height="50">
 		<p class="fs-4 my-auto mx-5">Tout le jardin</p>
 	</header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -39,6 +39,9 @@
 			</div>
 		</div>
 	</nav>
+	<div class="row">
+		<img src="pages/img/promotion.jpg" class="img-fluid" alt="promo image">
+	</div>
 
 	
   <?= $content; ?>

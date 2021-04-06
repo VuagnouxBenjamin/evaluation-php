@@ -53,15 +53,23 @@ class Database{
         return $datas; 
     }
 
-    // public function prepare($statement, $arguments, $class_name, $one = false){
-    //     $request = $this->getPDO()->prepare($statement); 
-    //     $request->execute($arguments);
-    //     $request->setFetchMode(PDO::FETCH_CLASS, $class_name);
+    /**
+     * @param mixed $statement requete SQL
+     * @param array $arguments A ajouter dans la requete SQL
+     * @param string $class_name class du fetch_class
+     * @param bool $one
+     * 
+     * @return [Class]
+     */
+    public function prepare($statement, $arguments, $class_name, $one = false){
+        $request = $this->getPDO()->prepare($statement); 
+        $request->execute($arguments);
+        $request->setFetchMode(PDO::FETCH_CLASS, $class_name);
 
-    //     if($one) {
-    //         $datas = $request->fetch();  
-    //     } else $datas = $request->fetchAll();
+        if($one) {
+            $datas = $request->fetch();  
+        } else $datas = $request->fetchAll();
 
-    //     return $datas; 
-    // }
+        return $datas; 
+    }
 }

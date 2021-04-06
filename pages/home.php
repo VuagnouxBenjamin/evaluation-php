@@ -1,6 +1,4 @@
-<div class="row">
-		<img src="pages/img/promotion.jpg" class="img-fluid" alt="promo image">
-	</div>
+
 	<div class="row m-auto shadow">
 		<div class="col-lg-8 col-xs-12 px-4">
 			<section>
