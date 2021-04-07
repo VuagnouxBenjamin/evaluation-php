@@ -6,19 +6,23 @@
     use App\Table\Categorie;  
     require '../app/App.php'; 
     use App\App;
-    // Initialisation de la BDD.
-    // require '../app/Database.php';
-    // use App\Database; 
-    // $db = new Database('jarditou'); 
+
     require_once('db_config.php');
+    
     // Récuperation des données. 
+
+    //Pour passer pro_id d'une page à l'autre. DIRTY
+    $pro_id = isset($_GET['pro_id']) ? $_GET['pro_id'] : $_POST['prod_id']; 
+    // var_dump($pro_id); 
+    // die; 
+
     $produits = $db->prepare(
         "SELECT * 
         FROM produits 
         JOIN categories 
             ON categories.cat_id = produits.pro_cat_id
         WHERE pro_id = ?  
-        ", [$_GET['pro_id']],'App\Table\Produit', true); 
+        ", [$pro_id],'App\Table\Produit', true); 
 
     $categories = $db->query(
         "SELECT DISTINCT * 
@@ -38,8 +42,11 @@
         <input type="text" class="form-control" id="prod_id" name="prod_id" value="<?= $produits->pro_id?>" readonly>
     </div>
     <div class="form-group mt-4">
-        <label for="prod_ref" class="mb-2">Référence :</label>
+        <label for="prod_ref" class="mb-2">Référence* :</label>
         <input type="text" class="form-control" id="prod_ref" name="prod_ref" value="<?= isset($_POST['prod_ref']) ? $_POST['prod_ref'] : $produits->pro_ref?>">
+        <p class="text-danger">
+            <?php echo isset($error_ref) ? $error_ref : '' ;?>
+        </p>
     </div>
     <!-- //changer ici par une liste qui prends les catégories. JOIN etc... -->
     <div class="form-group mt-4">
@@ -52,24 +59,33 @@
         </select>
     </div>
     <div class="form-group mt-4">
-        <label for="prod_lib" class="mb-2">Libellé :</label>
-        <input type="text" class="form-control" id="prod_lib" name="prod_lib" value="<?= $produits->pro_libelle?>">
+        <label for="prod_lib" class="mb-2">Libellé* :</label>
+        <input type="text" class="form-control" id="prod_lib" name="prod_lib" value="<?= isset($_POST['prod_lib']) ? $_POST['prod_lib'] : $produits->pro_libelle?>">
+        <p class="text-danger">
+            <?php echo isset($error_lib) ? $error_lib : '' ;?>
+        </p>
     </div>
     <div class="form-group mt-4">
         <label for="prod_des" class="mb-2">Description :</label>
         <textarea class="form-control" id="prod_des" rows="3" name="prod_des"><?= $produits->pro_description ?></textarea>
     </div>
     <div class="form-group mt-4">
-        <label for="prod_pri" class="mb-2">Prix :</label>
-        <input type="text" class="form-control" id="prod_pri" name="prod_pri" value="<?= $produits->pro_prix;?>">
+        <label for="prod_pri" class="mb-2">Prix* :</label>
+        <input type="text" class="form-control" id="prod_pri" name="prod_pri" value="<?= isset($_POST['prod_pri']) ? $_POST['prod_pri'] : $produits->pro_prix?>">
+        <p class="text-danger">
+            <?php echo isset($error_pri) ? $error_pri : '' ;?>
+        </p>
     </div>
     <div class="form-group mt-4">
-        <label for="prod_sto" class="mb-2">Stock :</label>
-        <input type="text" class="form-control" id="prod_sto" name="prod_sto" value="<?= $produits->pro_stock?>">
+        <label for="prod_sto" class="mb-2">Stock* :</label>
+        <input type="text" class="form-control" id="prod_sto" name="prod_sto" value="<?= isset($_POST['prod_sto']) ? $_POST['prod_sto'] : $produits->pro_stock?>">
+        <p class="text-danger">
+            <?php echo isset($error_sto) ? $error_sto : '' ;?>
+        </p>
     </div>
     <div class="form-group mt-4">
         <label for="prod_cou" class="mb-2">Couleur</label>
-        <input type="text" class="form-control" id="prod_cou" name="prod_cou" value="<?= $produits->pro_couleur?>">
+        <input type="text" class="form-control" id="prod_cou" name="prod_cou" value="<?= isset($_POST['prod_cou']) ? $_POST['prod_cou'] : $produits->pro_couleur?>">
     </div>
     <div class="form-group mt-4">
         <p class="mb-2">Produit bloqué ?</p>

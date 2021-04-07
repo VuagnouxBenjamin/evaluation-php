@@ -8,23 +8,23 @@ require_once('../pages/db_config.php');
 // récuperation de l'image. 
 $extension = 'jpg'; 
 $file_path = '../pages/'; 
-// $error;
-// if (empty($_POST['prod_ref']) || strlen($_POST['prod_ref']) > 10) {
-//     $error_ref = "Veuillez entrer une valeur de moins de 10 carractères"; 
-//     $error = true; 
-// }
-// if (empty($_POST['prod_lib']) || strlen($_POST['prod_lib']) > 200) {
-//     $error_lib = "Veuillez entrer une valeur de moins de 200 carractères"; 
-//     $error = true; 
-// }
-// if (!is_numeric($_POST['prod_pri'])) {
-//     $error_pri = "Veuillez entrer un prix valide"; 
-//     $error = true; 
-// }
-// if ($_POST['prod_sto'] < 0) {
-//     $error_sto = "Veuillez entrer '0' si aucun stock"; 
-//     $error = true; 
-// }
+$error;
+if (empty($_POST['prod_ref']) || strlen($_POST['prod_ref']) > 10) {
+    $error_ref = "Veuillez entrer une valeur de moins de 10 carractères"; 
+    $error = true; 
+}
+if (empty($_POST['prod_lib']) || strlen($_POST['prod_lib']) > 200) {
+    $error_lib = "Veuillez entrer une valeur de moins de 200 carractères"; 
+    $error = true; 
+}
+if (!is_numeric($_POST['prod_pri'])) {
+    $error_pri = "Veuillez entrer un prix valide"; 
+    $error = true; 
+}
+if ($_POST['prod_sto'] < 0) {
+    $error_sto = "Veuillez entrer '0' si aucun stock"; 
+    $error = true; 
+}
 
 
 
@@ -69,6 +69,7 @@ $arguments = [
 ];
 
 
+// REDIRECTION 
 
 if ($error) {
     include '../pages/update_form.php'; 
