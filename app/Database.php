@@ -72,4 +72,21 @@ class Database{
 
         return $datas; 
     }
+
+
+    public function delete($statement, $arguments){
+        $request = $this->getPDO()->prepare($statement); 
+        $request->execute($arguments);
+    }
+    
+    public function update($statement, $arguments){
+        $request = $this->getPDO()->prepare($statement); 
+        $request->execute($arguments);
+    }
+
+    public function getUsedRefs(){
+        $request = $this->getPDO()->prepare("SELECT pro_ref FROM produits"); 
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_COLUMN); 
+    }
 }

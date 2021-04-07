@@ -11,7 +11,8 @@
 </head>
 <body class="container">
 	<header class="d-none d-lg-flex m-2 justify-content-between align-content-center">
-		<img src="img/jarditou_logo.jpg" alt="logo jarditou.com" class="" height="50">
+	<!-- ../pages/img/jarditou_logo.jpg -->
+		<img src="<?= isset($file_path) ? $file_path : ''; ?>img/jarditou_logo.jpg" alt="logo jarditou.com" class="" height="50">
 		<p class="fs-4 my-auto mx-5">Tout le jardin</p>
 	</header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -26,10 +27,10 @@
 						<a class="nav-link active" aria-current="page" href="../index.php">Accueil</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="list.php">Produits</a>
+						<a class="nav-link" href="<?= isset($file_path) ? $file_path : ''; ?>list.php">Produits</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link disabled" href="index.php?p=contact" aria-disabled="true">Contact</a>
+						<a class="nav-link disabled" href="<?= isset($file_path) ? $file_path : ''; ?>index.php?p=contact" aria-disabled="true">Contact</a>
 					</li>
 				</ul>
 				<form class="d-flex">
@@ -40,5 +41,6 @@
 		</div>
 	</nav>
 	<div class="row">
-		<img src="img/promotion.jpg" class="img-fluid" alt="promo image">
+		<!-- ../pages/img/promotion.jpg -->
+		<img src="<?= isset($file_path) ? $file_path : ''; ?>img/promotion.jpg" class="img-fluid" alt="promo image">
 	</div>

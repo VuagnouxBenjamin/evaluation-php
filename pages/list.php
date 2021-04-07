@@ -1,4 +1,3 @@
-<?php include 'template/header.php' ?>
 <?php 
 
     // Initialisation de la classe Produit.
@@ -13,6 +12,8 @@
     // Recuperation des sources depuis la BDD. 
     $datas = $db->query('SELECT * FROM produits', 'App\Table\Produit'); 
 ?>
+
+<?php include 'template/header.php' ?>
 
 <table class="table table-bordered border-dark mt-3 table-responsive ">
     <thead>

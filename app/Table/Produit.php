@@ -38,7 +38,7 @@ class Produit{
         if ($this->pro_bloque == 1) {
             return '<span class="badge bg-danger">Bloqué</span>'; 
         } 
-        return $this->pro_bloque; 
+        return ''; 
     }
 
     /**
@@ -57,7 +57,7 @@ class Produit{
                 <label class="form-check-label" for="prod_blo_oui">Oui</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="prod_blo" id="prod_blo_non" value="" '.$disable.'>
+                <input class="form-check-input" type="radio" name="prod_blo" id="prod_blo_non" value="0" '.$disable.'>
                 <label class="form-check-label" for="prod_blo_non">Non</label>
             </div>'; 
         } 
@@ -67,7 +67,7 @@ class Produit{
                 <label class="form-check-label" for="prod_blo_oui">Oui</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="prod_blo" id="prod_blo_non" value="" checked '.$disable.'>
+                <input class="form-check-input" type="radio" name="prod_blo" id="prod_blo_non" value="0" checked '.$disable.'>
                 <label class="form-check-label" for="prod_blo_non">Non</label>
             </div>';  
     }
@@ -77,6 +77,6 @@ class Produit{
      * Retourne la date d'aujourd'hui
      */
     public function getDate(){
-        return date("Y-m-d");
+        return date("Y-m-d H:i:s");
     }
 }

@@ -33,7 +33,7 @@
     <!-- //changer ici par une liste qui prends les catégories. JOIN etc... -->
     <div class="form-group mt-4">
         <label for="prod_cat" class="mb-2">Catégorie :</label>
-        <select class="form-control" id="prod_cat" name="prod_cat" readonly>
+      c  <selet class="form-control" id="prod_cat" name="prod_cat" readonly>
             <!-- <?php foreach($categories as $categorie) : ?>
                 <option value = <?= $categorie->cat_id ?>><?= $categorie->cat_nom ?></option>
             <?php endforeach; ?> -->
@@ -70,7 +70,7 @@
     </div>
     <div class="form-group mt-4">
         <label for="prod_dat_mod" class="mb-2">Date de modification :</label>
-        <input type="date" class="form-control" id="prod_dat_mod" name="prod_dat_mod" value="<?= $produits->getDate();?>" readonly>
+        <input type="text" class="form-control" id="prod_dat_mod" name="prod_dat_mod" value="<?= str_replace('-', '/', $produits->getDate());?>" readonly>
     </div>
     <!-- <div class="form-group mt-4">
         <label for="prod_pic" class="mb-2">Image du produit :</label>

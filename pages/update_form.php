@@ -3,14 +3,14 @@
     require '../app/table/Produit.php'; 
     use App\Table\Produit; 
     require '../app/table/Categorie.php'; 
-    use App\Table\Categorie; 
-
-
+    use App\Table\Categorie;  
+    require '../app/App.php'; 
+    use App\App;
     // Initialisation de la BDD.
-    require '../app/Database.php';
-    use App\Database; 
-    $db = new Database('jarditou'); 
-
+    // require '../app/Database.php';
+    // use App\Database; 
+    // $db = new Database('jarditou'); 
+    require_once('db_config.php');
     // Récuperation des données. 
     $produits = $db->prepare(
         "SELECT * 
@@ -28,18 +28,18 @@
 
 <?php include 'template/header.php' ?>
 
-<div class="text-center mt-3">
+<div class="text-center mt-5">
     <img src="<?= $produits->getIMG() ?>" alt="" width="250">
 </div>
 
-<form action="models/update_script.php" method="post" enctype="multipart/form-data">
+<form action="../models/update_script.php" method="post" enctype="multipart/form-data">
     <div class="form-group mt-4">
-        <label for="prod_ref" class="mb-2">ID :</label>
-        <input type="text" class="form-control" id="prod_ref" name="prod_ref" value="<?= $produits->pro_id?>" readonly>
+        <label for="prod_id" class="mb-2">ID :</label>
+        <input type="text" class="form-control" id="prod_id" name="prod_id" value="<?= $produits->pro_id?>" readonly>
     </div>
     <div class="form-group mt-4">
         <label for="prod_ref" class="mb-2">Référence :</label>
-        <input type="text" class="form-control" id="prod_ref" name="prod_ref" value="<?= $produits->pro_ref?>">
+        <input type="text" class="form-control" id="prod_ref" name="prod_ref" value="<?= isset($_POST['prod_ref']) ? $_POST['prod_ref'] : $produits->pro_ref?>">
     </div>
     <!-- //changer ici par une liste qui prends les catégories. JOIN etc... -->
     <div class="form-group mt-4">
@@ -61,7 +61,7 @@
     </div>
     <div class="form-group mt-4">
         <label for="prod_pri" class="mb-2">Prix :</label>
-        <input type="text" class="form-control" id="prod_pri" name="prod_pri" value="<?= $produits->pro_prix . " €";?>">
+        <input type="text" class="form-control" id="prod_pri" name="prod_pri" value="<?= $produits->pro_prix;?>">
     </div>
     <div class="form-group mt-4">
         <label for="prod_sto" class="mb-2">Stock :</label>
@@ -81,7 +81,7 @@
     </div>
     <div class="form-group mt-4">
         <label for="prod_dat_mod" class="mb-2">Date de modification :</label>
-        <input type="date" class="form-control" id="prod_dat_mod" name="prod_dat_mod" value="<?= $produits->getDate();?>" readonly>
+        <input type="text" class="form-control" id="prod_dat_mod" name="prod_dat_mod" value="<?= App::getDateTime();?>" readonly>
     </div>
     <div class="form-group mt-4">
         <label for="prod_pic" class="mb-2">Image du produit :</label>
