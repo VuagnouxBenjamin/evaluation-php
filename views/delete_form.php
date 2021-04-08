@@ -1,17 +1,14 @@
 <?php 
-    // Initialisation des  classes Produit.
+    // Class init
     require '../controllers/table/Produit.php'; 
     use App\Table\Produit; 
-    // require '../app/table/Categorie.php'; 
-    // use App\Table\Categorie; 
 
-
-    // Initialisation de la BDD.
+    // DB init. 
     require '../controllers/Database.php';
     use App\Database; 
     $db = new Database('jarditou'); 
 
-    // Récuperation des données. 
+    // Getting Datas from DB
     $produits = $db->prepare(
         "SELECT * 
         FROM produits 

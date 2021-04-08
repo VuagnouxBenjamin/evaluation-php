@@ -1,15 +1,15 @@
 <?php 
 
-    // Initialisation de la classe Produit.
+    // Class init.
     require '../controllers/table/Produit.php'; 
     use App\Table\Produit; 
 
-    // Initialisation de la BDD.
+    // DB init. 
     require '../controllers/Database.php';
     use App\Database; 
     $db = new Database('jarditou'); 
     
-    // Recuperation des sources depuis la BDD. 
+    // Getting datas from DB.
     $datas = $db->query('SELECT * FROM produits', 'App\Table\Produit'); 
 ?>
 

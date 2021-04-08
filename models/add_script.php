@@ -1,10 +1,8 @@
 <?php 
-// require '../app/Database.php';
-// use App\Database; 
-// $db = isset($db) ? $db : new Database('jarditou'); 
+// DB init. 
 require_once('../views/db_config.php');
+
 // Check imputs. 
-// var_dump($db->getUsedRefs()); die(); 
 $file_path = '../views/'; 
 $error;
 if (empty($_POST['prod_ref']) || strlen($_POST['prod_ref']) > 10) {
@@ -43,8 +41,7 @@ $arguments = [
 $statement = "INSERT INTO produits (pro_cat_id, pro_ref, pro_libelle, pro_description, pro_prix, pro_stock, pro_couleur, pro_d_ajout, pro_bloque)
 VALUES (:pro_cat_id, :pro_ref, :pro_libelle, :pro_description, :pro_prix, :pro_stock, :pro_couleur, :pro_d_ajout, :pro_bloque)";
 
-// Redirect. 
-
+// Redirect and update.  
 if ($error) {
     include '../views/add_form.php'; 
 } else {

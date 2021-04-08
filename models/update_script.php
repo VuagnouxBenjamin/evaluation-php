@@ -1,14 +1,14 @@
 <?php 
-// Initialisation de la BDD.
-// require '../app/Database.php';
-// use App\Database; 
-// $db = new Database('jarditou'); 
+
+// DB init.
 require_once('../views/db_config.php');
 
-// récuperation de l'image. 
+// Setting default img & filepath.  
 $extension = 'jpg'; 
 $file_path = '../views/'; 
 $error;
+
+// Form validation. 
 if (empty($_POST['prod_ref']) || strlen($_POST['prod_ref']) > 10) {
     $error_ref = "Veuillez entrer une valeur de moins de 10 carractères"; 
     $error = true; 
@@ -26,26 +26,25 @@ if ($_POST['prod_sto'] < 0) {
     $error = true; 
 }
 
-
-
+//File handling. 
 if($_FILES['prod_pic']['error'] == 0)
 {
-    //types de fichiers autorisés : cas image de produit jarditou. 
+    // allowed img extensions
     $autorised_mime_types = ["image/gif", "image/jpeg", "image/pjpeg", "image/png", "image/x-png", "image/tiff"];
 
-    //extraction du type du fichier telechargé grace à l'extension FILE_INFO 
+    //img extension extraction
     $finfo = finfo_open(FILEINFO_MIME_TYPE); 
     $mime_type = finfo_file($finfo, $_FILES["prod_pic"]["tmp_name"]); 
     finfo_close($finfo);
 
 
-    //Est ce que le type est correct ? 
+    // extenstion validation
     if (in_array($mime_type, $autorised_mime_types)) {
-    //renomer le fichier. 
+    //naming. 
     $pro_id = $_POST["prod_id"];
     $extension = substr(strrchr($_FILES["prod_pic"]["name"], "."), 1);
 
-    //deplacer le fichier dans le dossier /img
+    // mooving from tmp
     move_uploaded_file($_FILES["prod_pic"]["tmp_name"], "../pages/img/$pro_id.$extension");
     } else {
     echo "Erreur, type de fichier non autorisé.<br>";
@@ -53,7 +52,7 @@ if($_FILES['prod_pic']['error'] == 0)
     };
 }
 
-
+// prepared arguments for sql querry. 
 $arguments = [
     $_POST['prod_cat'], 
     $_POST['prod_ref'], 

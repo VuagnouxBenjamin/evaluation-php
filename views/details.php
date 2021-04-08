@@ -1,14 +1,14 @@
 <?php 
-    // Initialisation de la classe Produit.
+    // Claass Init.
     require '../controllers/table/Produit.php'; 
     use App\Table\Produit; 
 
-    // Initialisation de la BDD.
+    // DB Init.
     require '../controllers/Database.php';
     use App\Database; 
     $db = new Database('jarditou'); 
 
-    //recuperation des données. 
+    // Getting datas from DB. 
     $produits = $db->prepare(
         "SELECT * 
         FROM produits 
@@ -30,7 +30,6 @@
         <label for="prod_ref" class="mb-2">Référence :</label>
         <input type="text" class="form-control" id="prod_ref" name="prod_ref" value="<?= $produits->pro_ref?>" readonly>
     </div>
-    <!-- //changer ici par une liste qui prends les catégories. JOIN etc... -->
     <div class="form-group mt-4">
         <label for="prod_cat" class="mb-2">Catégorie :</label>
       c  <selet class="form-control" id="prod_cat" name="prod_cat" readonly>
@@ -72,10 +71,6 @@
         <label for="prod_dat_mod" class="mb-2">Date de modification :</label>
         <input type="text" class="form-control" id="prod_dat_mod" name="prod_dat_mod" value="<?= str_replace('-', '/', $produits->getDate());?>" readonly>
     </div>
-    <!-- <div class="form-group mt-4">
-        <label for="prod_pic" class="mb-2">Image du produit :</label>
-        <input type="file" class="form-control" id="prod_pic" name="prod_pic">
-    </div> -->
 </form>
 
 <div class="my-5">

@@ -1,5 +1,5 @@
 <?php 
-    // Initialisation des  classes Produit.
+    // Class Init. 
     require '../controllers/table/Produit.php'; 
     use App\Table\Produit; 
     require '../controllers/table/Categorie.php'; 
@@ -7,13 +7,10 @@
     require '../controllers/App.php'; 
     use App\App; 
 
-    // // Initialisation de la BDD.
+    // DB init. 
     require_once('db_config.php');
-    // require '../app/Database.php';
-    // use App\Database; 
-    // $db = isset($db) ? $db : new Database('jarditou'); 
 
-    // Récuperation des données. 
+    // Getting data from DB. 
     $produits = $db->query(
         "SELECT * 
         FROM produits 
@@ -99,11 +96,6 @@
         <label for="prod_dat_ajout" class="mb-2">Date d'ajout :</label>
         <input type="text" class="form-control" id="prod_dat_ajout" name="prod_dat_ajout" value="<?php echo App::getDate();?>" readonly>
     </div>
-
-    <!-- <div class="form-group mt-4">
-        <label for="prod_pic" class="mb-2">Image du produit :</label>
-        <input type="file" class="form-control" id="prod_pic" name="prod_pic">
-    </div> -->
 
     <div class="my-5">
         <a href="list.php" class="btn btn-secondary btn-lg">Retour</a>

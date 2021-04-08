@@ -1,5 +1,5 @@
 <?php 
-    // Initialisation des  classes Produit.
+    // Class Initialisation.
     require '../controllers/table/Produit.php'; 
     use App\Table\Produit; 
     require '../controllers/table/Categorie.php'; 
@@ -9,13 +9,10 @@
 
     require_once('db_config.php');
     
-    // Récuperation des données. 
-
-    //Pour passer pro_id d'une page à l'autre. DIRTY
+    // Getting GET datas. 
     $pro_id = isset($_GET['pro_id']) ? $_GET['pro_id'] : $_POST['prod_id']; 
-    // var_dump($pro_id); 
-    // die; 
 
+    //  Getting DB Datas. -> to move in models. 
     $produits = $db->prepare(
         "SELECT * 
         FROM produits 
