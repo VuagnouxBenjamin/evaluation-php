@@ -3,11 +3,11 @@
 // require '../app/Database.php';
 // use App\Database; 
 // $db = new Database('jarditou'); 
-require_once('../pages/db_config.php');
+require_once('../views/db_config.php');
 
 // récuperation de l'image. 
 $extension = 'jpg'; 
-$file_path = '../pages/'; 
+$file_path = '../views/'; 
 $error;
 if (empty($_POST['prod_ref']) || strlen($_POST['prod_ref']) > 10) {
     $error_ref = "Veuillez entrer une valeur de moins de 10 carractères"; 
@@ -72,7 +72,7 @@ $arguments = [
 // REDIRECTION 
 
 if ($error) {
-    include '../pages/update_form.php'; 
+    include '../views/update_form.php'; 
 } else {
     // Récuperation des données. 
     $db->update(
@@ -93,7 +93,7 @@ if ($error) {
         , $arguments); 
 
     // redirection
-    header('location: ../pages/list.php');
+    header('location: ../views/list.php');
 }
 
 

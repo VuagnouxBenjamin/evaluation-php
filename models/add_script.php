@@ -2,10 +2,10 @@
 // require '../app/Database.php';
 // use App\Database; 
 // $db = isset($db) ? $db : new Database('jarditou'); 
-require_once('../pages/db_config.php');
+require_once('../views/db_config.php');
 // Check imputs. 
 // var_dump($db->getUsedRefs()); die(); 
-$file_path = '../pages/'; 
+$file_path = '../views/'; 
 $error;
 if (empty($_POST['prod_ref']) || strlen($_POST['prod_ref']) > 10) {
     $error_ref = "Veuillez entrer une valeur de moins de 10 carractères"; 
@@ -46,9 +46,9 @@ VALUES (:pro_cat_id, :pro_ref, :pro_libelle, :pro_description, :pro_prix, :pro_s
 // Redirect. 
 
 if ($error) {
-    include '../pages/add_form.php'; 
+    include '../views/add_form.php'; 
 } else {
     $db->update($statement, $arguments); 
-    header('location: ../pages/list.php');
+    header('location: ../views/list.php');
 }
 
